@@ -1,6 +1,5 @@
 import cv2
 
-x = 'Hallo'
+print("Package Imported")
 
-y = 5
-
+img = cv2.imread()
