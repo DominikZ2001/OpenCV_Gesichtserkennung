@@ -1,7 +1,18 @@
 import cv2
+import numpy as np
 
-print("Package Imported")
 
-img = cv2.imread("ressourcen/lena.png")
+cap = cv2.VideoCapture(1)
+cap.set(3,1280)
+cap.set(4,720)
 
-cv2.imshow("Output", img)
+
+
+while True:
+    success, img = cap.read()
+    cv2.imshow("video",img)
+    if cv2.waitKey(1) & 0xFF ==ord('q'):
+        break 
+    
+
+
