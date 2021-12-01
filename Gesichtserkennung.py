@@ -17,10 +17,7 @@ while(True):
         break
 cap.release()
 cv2.destroyAllWindows()
-=======
-import numpy as np
-import face_recognition
->>>>>>> f16f0c69e3db0a2c2b6a150733df94150edeac60
+
 
 
 
