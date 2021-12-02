@@ -11,10 +11,10 @@ print("\n [INFO] Initializing face capture. Look the camera and wait ...")
 count = 0
 while(True):
     ret, img = cam.read()
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    faces = face_detector.detectMultiScale(gray, 1.3, 5)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #Converts an image from one color space to another.
+    faces = face_detector.detectMultiScale(gray, 1.3, 5) #Detects objects of different sizes in the input image. The detected objects are returned as a list of rectangles.
     for (x,y,w,h) in faces:
-        cv2.rectangle(img, (x,y), (x+w,y+h), (255,0,0), 2)     
+        cv2.rectangle(img, (x,y), (x+w,y+h), (255,0,0), 2)  #used to draw a rectangle on any image   
         count += 1
         # Save the captured image into the datasets folder
         cv2.imwrite("dataset/User." + str(face_id) + '.' + str(count) + ".jpg", gray[y:y+h,x:x+w])
