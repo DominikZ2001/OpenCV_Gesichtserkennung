@@ -1,20 +1,23 @@
 import cv2
 import os
+
 cam = cv2.VideoCapture(0)
 cam.set(3, 640) # set video width
 cam.set(4, 480) # set video height
 face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+
 # For each person, enter one numeric face id
 face_id = input('\n enter user id end press <n> ==>  ')
 print("\n [INFO] Initializing face capture. Look the camera and wait ...")
+
 # Initialize individual sampling face count
 count = 0
 while(True):
     ret, img = cam.read()
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #Converts an image from one color space to another.
-    faces = face_detector.detectMultiScale(gray, 1.3, 5) #
+    faces = face_detector.detectMultiScale(gray, 1.3, 5) #Detects objects of different sizes in the input image. The detected objects are returned as a list of rectangles.
     for (x,y,w,h) in faces:
-        cv2.rectangle(img, (x,y), (x+w,y+h), (255,0,0), 2)  #   
+        cv2.rectangle(img, (x,y), (x+w,y+h), (255,0,0), 2)  #used to draw a rectangle on any image  
         count += 1
         # Save the captured image into the datasets folder
         cv2.imwrite("dataset/User." + str(face_id) + '.' + str(count) + ".jpg", gray[y:y+h,x:x+w])
