@@ -52,6 +52,7 @@ def training():
     # Print the numer of faces trained and end program
     print("\n [INFO] {0} faces trained.".format(len(np.unique(ids))))
 
+training()
 # Initialize individual sampling face count
 count = 0
 while(True):
@@ -69,10 +70,10 @@ while(True):
         break
     elif count >= 50: # Take 50 face sample and stop video
         break
-        
-training()
 
-#cleanup and training the recognizer with all faces       
+
+#cleanup and training the recognizer with all faces  
 cam.release()
+cv2.destroyAllWindows()    
+training()     
 print("\n [INFO] Exiting Program and cleanup stuff")
-cv2.destroyAllWindows()
