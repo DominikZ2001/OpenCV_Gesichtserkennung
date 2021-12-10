@@ -7,10 +7,8 @@ from PIL import Image
 
 #defaultnames related to ids: example ==> Dominik: id=1,  etc
 names = []
-names.append ('None')
-names.append ('Dominik')
-names.append ('Melvin')
-#cache array
+f = open('names.txt', 'r+')
+names = f.read().splitlines()
 
 def training(): #function for training the recognizer
 
@@ -52,12 +50,12 @@ def new_user():
 
     face_id = len(names)
     name = input('\n please enter your name <n> ==>  ')
+    f.write('\n' + name)
     names.append(name)
     cam = cv2.VideoCapture(0)
     cam.set(3, 640) # set video width
     cam.set(4, 480) # set video height
     face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-    #face_id = len(names)
     print("\n [INFO] Initializing face capture. Look the camera and wait ...") #instruction to wait
 
     # Initialize individual sampling face count    
@@ -78,8 +76,7 @@ def new_user():
             break
         elif count >= 50: # Take 50 face sample and stop video
             break
-        
-    training()
+    
     cam.release()
     cv2.destroyAllWindows() 
     return names
@@ -150,15 +147,15 @@ def recognizer():
             cam.release()
             cv2.destroyAllWindows() 
             new_user()
-            cam = cv2.VideoCapture(0)
-            cam.set(3, 640) # set video widht
-            cam.set(4, 480) # set video height
-            minW = 0.1*cam.get(3)
-            minH = 0.1*cam.get(4)
-            
+            training()    
+            x = 1
+            break
 
     #cleanup
-    print("\n [INFO] Exiting Program and cleanup stuff")
+    if x == 1:
+        print("\n [INFO] Your face has been added successfully. Please restart the program.")
+    else:
+        print("\n [INFO] Exiting Program and cleanup stuff")
     cam.release()
     cv2.destroyAllWindows() 
 
